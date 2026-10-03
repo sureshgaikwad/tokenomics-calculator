@@ -1,0 +1,18 @@
+{
+  "name": "tokenomics-calculator",
+  "version": "1.0.0",
+  "private": true,
+  "description": "OpenShift AI vs AWS Frontier TCO Calculator",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @tokenomics/pricing-data && npm run build -w @tokenomics/tco-core && npm run build -w @tokenomics/web",
+    "test": "npm run test -w @tokenomics/pricing-data && npm run test -w @tokenomics/tco-core",
+    "dev": "npm run build -w @tokenomics/pricing-data && npm run build -w @tokenomics/tco-core && npm run dev -w @tokenomics/web"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

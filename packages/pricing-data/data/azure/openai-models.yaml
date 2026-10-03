@@ -1,0 +1,52 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/"
+region: eastus
+currency: USD
+serviceName: Azure OpenAI
+models:
+  - id: azure-gpt-6-astra
+    displayName: GPT-6 Astra
+    inputPricePer1M: 5.0
+    outputPricePer1M: 20.0
+    maxContextTokens: 400000
+  - id: azure-gpt-5
+    displayName: GPT-5
+    inputPricePer1M: 1.25
+    outputPricePer1M: 10.0
+    maxContextTokens: 400000
+  - id: azure-gpt-4-1
+    displayName: GPT-4.1
+    inputPricePer1M: 2.0
+    outputPricePer1M: 8.0
+    maxContextTokens: 1047576
+  - id: azure-gpt-4-1-mini
+    displayName: GPT-4.1 mini
+    inputPricePer1M: 0.4
+    outputPricePer1M: 1.6
+    maxContextTokens: 1047576
+  - id: azure-gpt-4o
+    displayName: GPT-4o
+    inputPricePer1M: 2.5
+    outputPricePer1M: 10.0
+    maxContextTokens: 128000
+  - id: azure-gpt-4o-mini
+    displayName: GPT-4o mini
+    inputPricePer1M: 0.15
+    outputPricePer1M: 0.6
+    maxContextTokens: 128000
+  - id: azure-o3-mini
+    displayName: o3-mini (reasoning)
+    inputPricePer1M: 1.1
+    outputPricePer1M: 4.4
+    maxContextTokens: 200000
+    supportsExtendedThinking: true
+  - id: azure-o4-mini
+    displayName: o4-mini (reasoning)
+    inputPricePer1M: 1.1
+    outputPricePer1M: 4.4
+    maxContextTokens: 200000
+    supportsExtendedThinking: true
+embeddingModels:
+  - id: text-embedding-3-small
+    inputPricePer1M: 0.02

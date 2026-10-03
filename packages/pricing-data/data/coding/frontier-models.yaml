@@ -1,0 +1,75 @@
+version: "1.0"
+effectiveDate: "2026-03-01"
+source: "Vendor public pricing pages + planning placeholders — update independently of open-weight catalog"
+description: >
+  Frontier / managed API coding comparison targets. Prices and capability notes change frequently;
+  edit this file without touching open-weight model entries.
+models:
+  - id: openai.gpt-6-astra
+    displayName: GPT-6 Astra
+    provider: openai
+    cloudBindings:
+      azure: azure-gpt-6-astra
+      # AWS/GCP may not list this SKU yet — comparison still available via catalog price
+    role: coding-frontier
+    inputPricePer1M: 5.0
+    outputPricePer1M: 20.0
+    maxContextTokens: 400000
+    priceIsAssumption: true
+    notes: "Planning placeholder until list price is confirmed in your region/SKU."
+    lastUpdated: "2026-03-01"
+  - id: openai.gpt-4-1
+    displayName: GPT-4.1
+    provider: openai
+    cloudBindings:
+      azure: azure-gpt-4-1
+    role: coding-strong
+    inputPricePer1M: 2.0
+    outputPricePer1M: 8.0
+    maxContextTokens: 1047576
+    priceIsAssumption: false
+    lastUpdated: "2025-06-01"
+  - id: openai.gpt-5
+    displayName: GPT-5
+    provider: openai
+    cloudBindings:
+      azure: azure-gpt-5
+    role: coding-frontier
+    inputPricePer1M: 1.25
+    outputPricePer1M: 10.0
+    maxContextTokens: 400000
+    priceIsAssumption: false
+    lastUpdated: "2025-10-01"
+  - id: anthropic.claude-opus-4
+    displayName: Claude Opus 4
+    provider: anthropic
+    cloudBindings:
+      aws: anthropic.claude-opus-4
+    role: coding-frontier
+    inputPricePer1M: 15.0
+    outputPricePer1M: 75.0
+    maxContextTokens: 200000
+    priceIsAssumption: false
+    lastUpdated: "2025-06-01"
+  - id: anthropic.claude-sonnet-4
+    displayName: Claude Sonnet 4
+    provider: anthropic
+    cloudBindings:
+      aws: anthropic.claude-sonnet-4
+    role: coding-strong
+    inputPricePer1M: 3.0
+    outputPricePer1M: 15.0
+    maxContextTokens: 200000
+    priceIsAssumption: false
+    lastUpdated: "2025-06-01"
+  - id: anthropic.claude-3-5-sonnet
+    displayName: Claude 3.5 Sonnet
+    provider: anthropic
+    cloudBindings:
+      aws: anthropic.claude-3-5-sonnet
+    role: coding-strong
+    inputPricePer1M: 3.0
+    outputPricePer1M: 15.0
+    maxContextTokens: 200000
+    priceIsAssumption: false
+    lastUpdated: "2025-01-01"

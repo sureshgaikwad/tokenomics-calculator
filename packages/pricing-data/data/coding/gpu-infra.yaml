@@ -1,0 +1,83 @@
+version: "1.0"
+effectiveDate: "2026-03-01"
+source: "AWS EC2 public on-demand list (us-east-1) where known; other SKUs marked as planning assumptions"
+currency: USD
+description: >
+  GPU infrastructure catalog for coding-assistant self-hosted sizing.
+  Prefer instance-level pricing (gpus_per_instance × instance) over bare GPU $/hr.
+gpus:
+  - id: nvidia-h100-80gb
+    gpuName: NVIDIA H100 80GB
+    gpuMemoryGb: 80
+    usableMemoryFactor: 0.9
+  - id: nvidia-h200-141gb
+    gpuName: NVIDIA H200 141GB
+    gpuMemoryGb: 141
+    usableMemoryFactor: 0.9
+  - id: nvidia-b200-180gb
+    gpuName: NVIDIA B200 180GB
+    gpuMemoryGb: 180
+    usableMemoryFactor: 0.9
+instances:
+  - id: p5.48xlarge
+    displayName: AWS p5.48xlarge (8× H100 80GB)
+    cloudProvider: aws
+    region: us-east-1
+    instanceType: p5.48xlarge
+    gpuId: nvidia-h100-80gb
+    gpusPerInstance: 8
+    instanceHourlyCost:
+      onDemand: 98.32
+      oneYear: 68.82
+      threeYear: 49.16
+      spot: 45.0
+    priceIsAssumption: false
+    availabilityNotes: "Matches existing EC2 GPU catalog; live overlay may refresh onDemand."
+  - id: p5e.48xlarge
+    displayName: AWS p5e.48xlarge (8× H200 141GB)
+    cloudProvider: aws
+    region: us-east-1
+    instanceType: p5e.48xlarge
+    gpuId: nvidia-h200-141gb
+    gpusPerInstance: 8
+    instanceHourlyCost:
+      onDemand: 110.0
+      oneYear: 77.0
+      threeYear: 55.0
+      spot: 50.0
+    priceIsAssumption: true
+    availabilityNotes: "Planning placeholder — replace with your negotiated / Price List rates."
+  - id: p6-b200.48xlarge
+    displayName: AWS p6-b200.48xlarge (8× B200 180GB)
+    cloudProvider: aws
+    region: us-east-1
+    instanceType: p6-b200.48xlarge
+    gpuId: nvidia-b200-180gb
+    gpusPerInstance: 8
+    instanceHourlyCost:
+      onDemand: 140.0
+      oneYear: 98.0
+      threeYear: 70.0
+      spot: 63.0
+    priceIsAssumption: true
+    availabilityNotes: "Planning placeholder — B200 SKUs and regions vary; edit before customer quotes."
+  - id: g6e.48xlarge
+    displayName: AWS g6e.48xlarge (8× L40S 48GB)
+    cloudProvider: aws
+    region: us-east-1
+    instanceType: g6e.48xlarge
+    gpuId: nvidia-l40s-48gb
+    gpusPerInstance: 8
+    instanceHourlyCost:
+      onDemand: 17.92
+      oneYear: 12.54
+      threeYear: 8.96
+      spot: 7.2
+    priceIsAssumption: true
+    availabilityNotes: "Derived from g6e.2xlarge ×8 planning scale; verify Price List before quoting."
+# Lightweight GPU type for smaller coding models (referenced by g6e.48xlarge)
+extraGpus:
+  - id: nvidia-l40s-48gb
+    gpuName: NVIDIA L40S 48GB
+    gpuMemoryGb: 48
+    usableMemoryFactor: 0.9

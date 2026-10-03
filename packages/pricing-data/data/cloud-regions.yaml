@@ -1,0 +1,48 @@
+version: "1.0"
+aws:
+  - id: us-east-1
+    name: US East (N. Virginia)
+  - id: us-east-2
+    name: US East (Ohio)
+  - id: us-west-2
+    name: US West (Oregon)
+  - id: eu-west-1
+    name: Europe (Ireland)
+  - id: eu-central-1
+    name: Europe (Frankfurt)
+  - id: ap-south-1
+    name: Asia Pacific (Mumbai)
+  - id: ap-south-2
+    name: Asia Pacific (Hyderabad)
+azure:
+  - id: eastus
+    name: East US
+  - id: eastus2
+    name: East US 2
+  - id: westus2
+    name: West US 2
+  - id: westeurope
+    name: West Europe
+  - id: northeurope
+    name: North Europe
+  - id: centralindia
+    name: Central India (Pune)
+  - id: southindia
+    name: South India (Chennai)
+  - id: westindia
+    name: West India (Mumbai)
+gcp:
+  - id: us-central1
+    name: Iowa (us-central1)
+  - id: us-east1
+    name: South Carolina (us-east1)
+  - id: us-west1
+    name: Oregon (us-west1)
+  - id: europe-west1
+    name: Belgium (europe-west1)
+  - id: europe-west4
+    name: Netherlands (europe-west4)
+  - id: asia-south1
+    name: Mumbai (asia-south1)
+  - id: asia-south2
+    name: Delhi (asia-south2)

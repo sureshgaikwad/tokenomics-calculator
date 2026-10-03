@@ -1,0 +1,35 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+region: us-central1
+currency: USD
+serviceName: Vertex AI
+models:
+  - id: vertex-gemini-2-5-pro
+    displayName: Gemini 2.5 Pro
+    inputPricePer1M: 1.25
+    outputPricePer1M: 10.0
+    maxContextTokens: 1048576
+  - id: vertex-gemini-2-5-flash
+    displayName: Gemini 2.5 Flash
+    inputPricePer1M: 0.15
+    outputPricePer1M: 0.6
+    maxContextTokens: 1048576
+  - id: vertex-gemini-2.0-flash
+    displayName: Gemini 2.0 Flash
+    inputPricePer1M: 0.1
+    outputPricePer1M: 0.4
+    maxContextTokens: 1048576
+  - id: vertex-gemini-1.5-pro
+    displayName: Gemini 1.5 Pro
+    inputPricePer1M: 1.25
+    outputPricePer1M: 5.0
+    maxContextTokens: 2097152
+  - id: vertex-gemini-1.5-flash
+    displayName: Gemini 1.5 Flash
+    inputPricePer1M: 0.075
+    outputPricePer1M: 0.3
+    maxContextTokens: 1048576
+embeddingModels:
+  - id: text-embedding-004
+    inputPricePer1M: 0.025

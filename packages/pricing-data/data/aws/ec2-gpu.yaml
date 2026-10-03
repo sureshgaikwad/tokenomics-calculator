@@ -1,0 +1,260 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://aws.amazon.com/ec2/pricing/on-demand/"
+region: us-east-1
+currency: USD
+instances:
+  - id: g6e.2xlarge
+    gpus: 1
+    gpuModel: L40S
+    accelerator: nvidia
+    vramGbPerGpu: 48
+    vcpu: 8
+    memoryGb: 32
+    hourlyUsd:
+      onDemand: 2.24
+      oneYear: 1.57
+      threeYear: 1.12
+      spot: 0.9
+  - id: inf2.24xlarge
+    gpus: 8
+    gpuModel: Inferentia2
+    accelerator: neuron
+    vcpu: 96
+    memoryGb: 384
+    hourlyUsd:
+      onDemand: 6.49
+      oneYear: 4.54
+      threeYear: 3.25
+      spot: 2.6
+  - id: inf2.48xlarge
+    gpus: 24
+    gpuModel: Inferentia2
+    accelerator: neuron
+    vcpu: 192
+    memoryGb: 768
+    hourlyUsd:
+      onDemand: 12.98
+      oneYear: 9.09
+      threeYear: 6.49
+      spot: 5.2
+  - id: g6.xlarge
+    gpus: 1
+    gpuModel: L4
+    vcpu: 4
+    memoryGb: 16
+    hourlyUsd:
+      onDemand: 0.804
+      oneYear: 0.56
+      threeYear: 0.4
+      spot: 0.32
+  - id: g6.2xlarge
+    gpus: 1
+    gpuModel: L4
+    vcpu: 8
+    memoryGb: 32
+    hourlyUsd:
+      onDemand: 0.978
+      oneYear: 0.68
+      threeYear: 0.49
+      spot: 0.39
+  - id: g5.xlarge
+    gpus: 1
+    gpuModel: A10G
+    vcpu: 4
+    memoryGb: 16
+    hourlyUsd:
+      onDemand: 1.006
+      oneYear: 0.7
+      threeYear: 0.5
+      spot: 0.4
+  - id: g5.2xlarge
+    gpus: 1
+    gpuModel: A10G
+    vcpu: 8
+    memoryGb: 32
+    hourlyUsd:
+      onDemand: 1.212
+      oneYear: 0.85
+      threeYear: 0.61
+      spot: 0.48
+  - id: g5.12xlarge
+    gpus: 4
+    gpuModel: A10G
+    vcpu: 48
+    memoryGb: 192
+    hourlyUsd:
+      onDemand: 5.672
+      oneYear: 3.97
+      threeYear: 2.84
+      spot: 2.2
+  - id: g6.12xlarge
+    gpus: 4
+    gpuModel: L4
+    vcpu: 48
+    memoryGb: 192
+    hourlyUsd:
+      onDemand: 4.601
+      oneYear: 3.22
+      threeYear: 2.3
+      spot: 1.8
+  - id: p5.48xlarge
+    gpus: 8
+    gpuModel: H100
+    vcpu: 192
+    memoryGb: 2048
+    hourlyUsd:
+      onDemand: 98.32
+      oneYear: 68.82
+      threeYear: 49.16
+      spot: 45.0
+openWeightModels:
+  - modelId: qwen3-coder-30b-a3b-fp8
+    displayName: Qwen3-Coder-30B-A3B Instruct (FP8, L40S)
+    quantization: fp8
+    preferredAccelerator: nvidia
+    minVramGbPerGpu: 40
+    outputTokensPerSecPerGpu: 1357
+    sustainedOutputTpsPerGpu: 692
+    maxContextTokens: 32768
+    minPhysicalGpus: 1
+    notes: "Private Code Assistant primary; vLLM TP=1 on g6e.2xlarge"
+  - modelId: qwen3-coder-30b-a3b-bf16-neuron
+    displayName: Qwen3-Coder-30B-A3B Instruct (BF16, Inferentia2)
+    quantization: bf16
+    preferredAccelerator: neuron
+    minVramGbPerGpu: 8
+    outputTokensPerSecPerGpu: 17
+    sustainedOutputTpsPerGpu: 12
+    maxContextTokens: 8192
+    minPhysicalGpus: 8
+    notes: "TP=8 per instance; no FP8 on Neuron — see PCA README"
+  - modelId: llama-3.3-70b
+    displayName: Meta Llama 3.3 70B Instruct
+    quantization: fp16
+    minVramGbPerGpu: 40
+    outputTokensPerSecPerGpu: 48
+    maxContextTokens: 128000
+    minPhysicalGpus: 2
+    notes: Closest open-weight peer to many frontier APIs on OLL
+  - modelId: qwen2.5-72b
+    displayName: Qwen 2.5 72B Instruct
+    quantization: fp16
+    minVramGbPerGpu: 40
+    outputTokensPerSecPerGpu: 44
+    maxContextTokens: 128000
+    minPhysicalGpus: 2
+  - modelId: qwen2.5-32b
+    displayName: Qwen 2.5 32B Instruct
+    quantization: fp16
+    minVramGbPerGpu: 24
+    outputTokensPerSecPerGpu: 70
+    maxContextTokens: 128000
+    minPhysicalGpus: 1
+  - modelId: qwen2.5-coder-32b
+    displayName: Qwen 2.5 Coder 32B Instruct
+    quantization: fp16
+    minVramGbPerGpu: 24
+    outputTokensPerSecPerGpu: 72
+    maxContextTokens: 128000
+    minPhysicalGpus: 1
+  - modelId: deepseek-v3
+    displayName: DeepSeek V3 (MoE)
+    quantization: fp8
+    minVramGbPerGpu: 80
+    outputTokensPerSecPerGpu: 30
+    maxContextTokens: 128000
+    minPhysicalGpus: 8
+    notes: Large MoE; size fleet for peak SLA separately
+  - modelId: deepseek-r1-distill-70b
+    displayName: DeepSeek R1 Distill Llama 70B
+    quantization: fp16
+    minVramGbPerGpu: 40
+    outputTokensPerSecPerGpu: 40
+    maxContextTokens: 128000
+    minPhysicalGpus: 2
+  - modelId: mistral-small-3
+    displayName: Mistral Small 3.1 (24B)
+    quantization: fp16
+    outputTokensPerSecPerGpu: 85
+    maxContextTokens: 128000
+    minPhysicalGpus: 1
+  - modelId: mistral-large-3
+    displayName: Mistral Large 3
+    quantization: fp16
+    minVramGbPerGpu: 48
+    outputTokensPerSecPerGpu: 38
+    maxContextTokens: 128000
+    minPhysicalGpus: 4
+  - modelId: gemma-3-27b
+    displayName: Gemma 3 27B IT
+    quantization: fp16
+    minVramGbPerGpu: 32
+    outputTokensPerSecPerGpu: 58
+    maxContextTokens: 128000
+    minPhysicalGpus: 1
+  - modelId: llama-3-8b
+    displayName: Meta Llama 3 8B Instruct
+    quantization: fp16
+    outputTokensPerSecPerGpu: 120
+    maxContextTokens: 128000
+    minPhysicalGpus: 1
+    notes: Fits single L4/A10G; common default for OAI KServe/vLLM
+  - modelId: llama-3.1-8b
+    displayName: Meta Llama 3.1 8B Instruct
+    quantization: fp16
+    outputTokensPerSecPerGpu: 115
+    maxContextTokens: 128000
+    minPhysicalGpus: 1
+  - modelId: llama-3-70b
+    displayName: Meta Llama 3 70B Instruct
+    quantization: fp16
+    minVramGbPerGpu: 40
+    outputTokensPerSecPerGpu: 45
+    maxContextTokens: 128000
+    minPhysicalGpus: 2
+    notes: Typically 2–4 GPUs; use g5.12xlarge or multi single-GPU nodes
+  - modelId: llama-3.1-70b
+    displayName: Meta Llama 3.1 70B Instruct
+    quantization: fp16
+    outputTokensPerSecPerGpu: 42
+    maxContextTokens: 128000
+    minPhysicalGpus: 2
+  - modelId: mistral-7b
+    displayName: Mistral 7B Instruct
+    quantization: fp16
+    outputTokensPerSecPerGpu: 110
+    maxContextTokens: 32000
+    minPhysicalGpus: 1
+  - modelId: mixtral-8x7b
+    displayName: Mixtral 8x7B Instruct
+    quantization: fp16
+    outputTokensPerSecPerGpu: 55
+    maxContextTokens: 32000
+    minPhysicalGpus: 2
+  - modelId: granite-8b
+    displayName: IBM Granite 8B (instruct)
+    quantization: fp16
+    outputTokensPerSecPerGpu: 100
+    maxContextTokens: 128000
+    minPhysicalGpus: 1
+  - modelId: mistral-large
+    displayName: Mistral Large (open weights reference)
+    quantization: fp16
+    outputTokensPerSecPerGpu: 35
+    maxContextTokens: 32000
+    minPhysicalGpus: 4
+# Legacy alias — prefer openWeightModels
+modelThroughput:
+  - modelId: llama-3-70b
+    quantization: fp16
+    outputTokensPerSecPerGpu: 45
+    maxContextTokens: 128000
+  - modelId: llama-3-8b
+    quantization: fp16
+    outputTokensPerSecPerGpu: 120
+    maxContextTokens: 128000
+  - modelId: mistral-large
+    quantization: fp16
+    outputTokensPerSecPerGpu: 35
+    maxContextTokens: 32000

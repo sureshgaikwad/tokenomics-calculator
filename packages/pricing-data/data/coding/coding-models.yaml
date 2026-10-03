@@ -1,0 +1,144 @@
+version: "1.0"
+effectiveDate: "2026-03-01"
+source: "Vendor model cards + planning assumptions — throughput/VRAM not fabricated as benchmarks"
+description: >
+  Data-driven open-weight coding model catalog. Add/remove models by editing this file.
+  Fields marked valueIsAssumption: true are editable planning inputs, not measured benchmarks.
+models:
+  - modelId: qwen3-coder-next
+    modelName: Qwen3-Coder-Next
+    modelFamily: qwen3-coder
+    totalParametersB: null
+    activeParametersB: null
+    architecture: moe-or-dense-tba
+    precision: fp8
+    weightMemoryGb: 80
+    weightMemoryIsAssumption: true
+    maximumContext: 262144
+    recommendedContext: 32768
+    minimumGpuMemoryGb: 80
+    minimumGpuCount: 2
+    recommendedGpuType: nvidia-h100-80gb
+    tensorParallelRequirement: 2
+    # Decode throughput left null → calculator requires editable assumption or falls back to openWeightModels
+    estimatedPrefillThroughputTokPerSec: null
+    estimatedDecodeThroughputTokPerSecPerGpu: null
+    estimatedConcurrentSequences: null
+    throughputIsAssumption: true
+    frontierComparison:
+      frontierModelId: openai.gpt-6-astra
+      classification: comparison-target
+      evidenceNote: "Comparison target for coding assistants; requires workload-specific validation."
+    openWeightBridgeId: qwen3-coder-30b-a3b-fp8
+    benchmarkNotes: "Exact Next-gen parameter/throughput figures not locked in catalog — use Advanced assumptions."
+    lastUpdated: "2026-03-01"
+
+  - modelId: minimax-m2.5
+    modelName: MiniMax M2.5
+    modelFamily: minimax
+    totalParametersB: null
+    activeParametersB: null
+    architecture: unknown
+    precision: fp8
+    weightMemoryGb: 120
+    weightMemoryIsAssumption: true
+    maximumContext: 128000
+    recommendedContext: 32000
+    minimumGpuMemoryGb: 80
+    minimumGpuCount: 4
+    recommendedGpuType: nvidia-h100-80gb
+    tensorParallelRequirement: 4
+    estimatedPrefillThroughputTokPerSec: null
+    estimatedDecodeThroughputTokPerSecPerGpu: null
+    estimatedConcurrentSequences: null
+    throughputIsAssumption: true
+    frontierComparison:
+      frontierModelId: anthropic.claude-sonnet-4
+      classification: requires-workload-specific-validation
+      evidenceNote: "Requires workload-specific validation; no apples-to-apples public coding suite wired yet."
+    openWeightBridgeId: null
+    benchmarkNotes: "Planning entry — set decode tok/s/GPU in scenario overrides before quoting."
+    lastUpdated: "2026-03-01"
+
+  - modelId: deepseek-v3.2
+    modelName: DeepSeek V3.2
+    modelFamily: deepseek-v3
+    totalParametersB: 671
+    activeParametersB: 37
+    architecture: moe
+    precision: fp8
+    weightMemoryGb: 350
+    weightMemoryIsAssumption: true
+    maximumContext: 128000
+    recommendedContext: 32000
+    minimumGpuMemoryGb: 80
+    minimumGpuCount: 8
+    recommendedGpuType: nvidia-h200-141gb
+    tensorParallelRequirement: 8
+    estimatedPrefillThroughputTokPerSec: null
+    estimatedDecodeThroughputTokPerSecPerGpu: null
+    estimatedConcurrentSequences: null
+    throughputIsAssumption: true
+    frontierComparison:
+      frontierModelId: openai.gpt-5
+      classification: comparison-target
+      evidenceNote: "Comparison target vs strong frontier coding APIs; MoE serving topology dominates TCO."
+    openWeightBridgeId: deepseek-v3
+    benchmarkNotes: "Bridges to existing deepseek-v3 openWeight throughput when present; V3.2 deltas are assumptions."
+    lastUpdated: "2026-03-01"
+
+  - modelId: glm-5
+    modelName: GLM-5
+    modelFamily: glm
+    totalParametersB: null
+    activeParametersB: null
+    architecture: unknown
+    precision: fp8
+    weightMemoryGb: 160
+    weightMemoryIsAssumption: true
+    maximumContext: 128000
+    recommendedContext: 32000
+    minimumGpuMemoryGb: 80
+    minimumGpuCount: 4
+    recommendedGpuType: nvidia-h100-80gb
+    tensorParallelRequirement: 4
+    estimatedPrefillThroughputTokPerSec: null
+    estimatedDecodeThroughputTokPerSecPerGpu: null
+    estimatedConcurrentSequences: null
+    throughputIsAssumption: true
+    frontierComparison:
+      frontierModelId: anthropic.claude-opus-4
+      classification: requires-workload-specific-validation
+      evidenceNote: "Requires workload-specific validation; GLM-5.x family placeholder for catalog extensibility."
+    openWeightBridgeId: null
+    benchmarkNotes: "Add measured decode tok/s and weight memory before customer-facing quotes."
+    lastUpdated: "2026-03-01"
+
+  # Existing project-backed coding model with measured/planning throughput already in ec2-gpu.yaml
+  - modelId: qwen3-coder-30b-a3b-fp8
+    modelName: Qwen3-Coder-30B-A3B Instruct (FP8)
+    modelFamily: qwen3-coder
+    totalParametersB: 30
+    activeParametersB: 3
+    architecture: moe
+    precision: fp8
+    weightMemoryGb: 32
+    weightMemoryIsAssumption: false
+    maximumContext: 32768
+    recommendedContext: 16000
+    minimumGpuMemoryGb: 40
+    minimumGpuCount: 1
+    recommendedGpuType: nvidia-l40s-48gb
+    tensorParallelRequirement: 1
+    estimatedPrefillThroughputTokPerSec: null
+    estimatedDecodeThroughputTokPerSecPerGpu: 692
+    estimatedConcurrentSequences: null
+    throughputIsAssumption: false
+    frontierComparison:
+      frontierModelId: anthropic.claude-3-5-sonnet
+      classification: comparable-on-selected-coding-benchmarks
+      evidenceNote: "PCA reference stack; compare carefully — not absolute equivalence."
+    openWeightBridgeId: qwen3-coder-30b-a3b-fp8
+    benchmarkNotes: "Uses sustainedOutputTpsPerGpu from Private Code Assistant / ec2-gpu catalog."
+    lastUpdated: "2025-01-01"
+    source: "packages/pricing-data/data/aws/ec2-gpu.yaml + PCA reference"

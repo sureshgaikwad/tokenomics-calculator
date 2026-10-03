@@ -1,0 +1,121 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://aws.amazon.com/bedrock/pricing/"
+region: us-east-1
+currency: USD
+models:
+  - id: anthropic.claude-sonnet-4
+    displayName: Claude Sonnet 4
+    inputPricePer1M: 3.0
+    outputPricePer1M: 15.0
+    maxContextTokens: 200000
+    supportsExtendedThinking: true
+    awsPriceList:
+      provider: Anthropic
+      model: Claude Sonnet 4
+  - id: anthropic.claude-opus-4
+    displayName: Claude Opus 4
+    inputPricePer1M: 15.0
+    outputPricePer1M: 75.0
+    maxContextTokens: 200000
+    supportsExtendedThinking: true
+    awsPriceList:
+      provider: Anthropic
+      model: Claude Opus 4
+  - id: anthropic.claude-3-5-sonnet
+    displayName: Claude 3.5 Sonnet
+    inputPricePer1M: 3.0
+    outputPricePer1M: 15.0
+    cacheReadPricePer1M: 0.3
+    maxContextTokens: 200000
+    supportsExtendedThinking: false
+    awsPriceList:
+      provider: Anthropic
+      model: Claude 3.5 Sonnet
+      modelAliases:
+        - Claude 3.5 Sonnet v2
+        - Claude Sonnet 4.5
+  - id: anthropic.claude-3-7-sonnet
+    displayName: Claude 3.7 Sonnet (hybrid reasoning)
+    inputPricePer1M: 3.0
+    outputPricePer1M: 15.0
+    maxContextTokens: 200000
+    supportsExtendedThinking: true
+    awsPriceList:
+      provider: Anthropic
+      model: Claude 3.7 Sonnet
+      modelAliases:
+        - Claude Sonnet 4.6
+  - id: anthropic.claude-3-5-haiku
+    displayName: Claude 3.5 Haiku
+    inputPricePer1M: 0.8
+    outputPricePer1M: 4.0
+    maxContextTokens: 200000
+    awsPriceList:
+      provider: Anthropic
+      model: Claude 3.5 Haiku
+  - id: anthropic.claude-3-haiku
+    displayName: Claude 3 Haiku
+    inputPricePer1M: 0.25
+    outputPricePer1M: 1.25
+    maxContextTokens: 200000
+    awsPriceList:
+      provider: Anthropic
+      model: Claude 3 Haiku
+  - id: amazon.nova-pro-v1
+    displayName: Amazon Nova Pro
+    inputPricePer1M: 0.8
+    outputPricePer1M: 3.2
+    maxContextTokens: 300000
+  - id: amazon.nova-lite-v1
+    displayName: Amazon Nova Lite
+    inputPricePer1M: 0.06
+    outputPricePer1M: 0.24
+    maxContextTokens: 300000
+  - id: amazon.nova-micro-v1
+    displayName: Amazon Nova Micro
+    inputPricePer1M: 0.035
+    outputPricePer1M: 0.14
+    maxContextTokens: 128000
+  - id: meta.llama3-3-70b-instruct
+    displayName: Llama 3.3 70B Instruct
+    inputPricePer1M: 0.99
+    outputPricePer1M: 0.99
+    maxContextTokens: 128000
+    awsPriceList:
+      provider: Meta
+      model: Llama 3.3 70B Instruct
+  - id: meta.llama3-70b-instruct
+    displayName: Llama 3 70B Instruct
+    inputPricePer1M: 2.65
+    outputPricePer1M: 3.5
+    maxContextTokens: 8192
+    awsPriceList:
+      provider: Meta
+      model: Llama 3.3 70B Instruct
+      modelAliases:
+        - Llama 3 70B Instruct
+  - id: mistral.mistral-large-3
+    displayName: Mistral Large 3
+    inputPricePer1M: 2.0
+    outputPricePer1M: 6.0
+    maxContextTokens: 128000
+  - id: deepseek.r1-v1
+    displayName: DeepSeek R1
+    inputPricePer1M: 1.35
+    outputPricePer1M: 5.4
+    maxContextTokens: 128000
+    supportsExtendedThinking: true
+  - id: amazon.titan-embed-text-v2
+    displayName: Titan Embed Text v2
+    inputPricePer1M: 0.02
+    outputPricePer1M: 0
+    isEmbedding: true
+    awsPriceList:
+      provider: Amazon
+      model: Titan Text Embeddings V2
+      modelAliases:
+        - Titan Embeddings G1 - Text v2
+embeddingModels:
+  - id: amazon.titan-embed-text-v2
+    inputPricePer1M: 0.02

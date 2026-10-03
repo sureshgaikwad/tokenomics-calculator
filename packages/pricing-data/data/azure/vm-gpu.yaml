@@ -1,0 +1,42 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/"
+region: eastus
+currency: USD
+instances:
+  - id: Standard_NC4as_T4_v3
+    gpus: 1
+    gpuModel: T4
+    accelerator: nvidia
+    vramGbPerGpu: 16
+    vcpu: 4
+    memoryGb: 28
+    hourlyUsd:
+      onDemand: 0.526
+      oneYear: 0.368
+      threeYear: 0.263
+      spot: 0.15
+  - id: Standard_NC8as_T4_v3
+    gpus: 1
+    gpuModel: T4
+    accelerator: nvidia
+    vramGbPerGpu: 16
+    vcpu: 8
+    memoryGb: 56
+    hourlyUsd:
+      onDemand: 0.752
+      oneYear: 0.526
+      threeYear: 0.376
+      spot: 0.22
+  - id: Standard_NC24ads_A100_v4
+    gpus: 1
+    gpuModel: A100
+    accelerator: nvidia
+    vramGbPerGpu: 80
+    vcpu: 24
+    memoryGb: 220
+    hourlyUsd:
+      onDemand: 3.673
+      oneYear: 2.571
+      threeYear: 1.837
+      spot: 1.1

@@ -1,0 +1,21 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://aws.amazon.com/rosa/pricing/"
+region: us-east-1
+currency: USD
+workerFeePer4VcpuHour:
+  onDemand: 0.171
+  oneYear: 0.114
+  threeYear: 0.076
+workerFeePer4VcpuYear:
+  onDemand: 1500
+  oneYear: 1000
+  threeYear: 667
+hcpClusterFeePerHour: 0.25
+defaultWorkerInstance:
+  type: m5.xlarge
+  vcpu: 4
+  hourlyInfraUsd: 0.113
+  rootVolumeGb: 300
+  rootVolumeGbMonthUsd: 0.08
+defaultWorkerCount: 6

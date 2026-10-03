@@ -1,0 +1,136 @@
+version: "1.0"
+source: https://github.com/manu-joy/Private_Code_Assistant#cross-phase-cost-comparison-qwen3-coder-30b-2-instances
+model: Qwen3-Coder-30B-A3B-Instruct
+description: >
+  ROSA HCP private code assistant (Dev Spaces + RHOAI vLLM). Cross-phase infra compares
+  1–2 NVIDIA L40S (g6e.2xlarge, FP8) vs Inferentia2 (BF16, TP=8 per instance).
+phases:
+  - id: pca-phase-1
+    name: "Phase 1 — 1× g6e.2xlarge (L40S, FP8)"
+    status: verified
+    devCapacity: "10–15 concurrent developers"
+    benchmark:
+      costPerHourUsd: 2.24
+      peakOutputTps: 1357
+      sustainedOutputTpsAt30Concurrent: 692
+      costPer1MOutputTokensUsdPeak: 0.46
+      costPer1MOutputTokensUsdSustained: 0.9
+    fleet:
+      - instanceId: g6e.2xlarge
+        count: 1
+    openshift:
+      selfHostedModelId: qwen3-coder-30b-a3b-fp8
+      useHcp: true
+      workerCount: 6
+    workload:
+      kind: codeAssistant
+      requestsPerDay: 800
+      peakConcurrentRequests: 12
+      avgInputTokensPerRequest: 4000
+      avgOutputTokensPerRequest: 1500
+      avgThinkingTokensPerRequest: 2500
+      activeHoursFraction: 0.45
+
+  - id: pca-phase-2
+    name: "Phase 2 — 2× g6e.2xlarge (L40S, llm-d)"
+    status: verified
+    devCapacity: "20–30 concurrent developers"
+    benchmark:
+      costPerHourUsd: 4.48
+      peakOutputTps: 2714
+      sustainedOutputTpsAt30Concurrent: 1384
+      costPer1MOutputTokensUsdPeak: 0.46
+    fleet:
+      - instanceId: g6e.2xlarge
+        count: 2
+    openshift:
+      selfHostedModelId: qwen3-coder-30b-a3b-fp8
+      useHcp: true
+      workerCount: 6
+    workload:
+      kind: codeAssistant
+      requestsPerDay: 4000
+      peakConcurrentRequests: 25
+      avgInputTokensPerRequest: 4000
+      avgOutputTokensPerRequest: 1500
+      avgThinkingTokensPerRequest: 2500
+      activeHoursFraction: 0.45
+
+  - id: pca-phase-3
+    name: "Phase 3 — 2× L40S + 1× inf2.24xlarge (heterogeneous)"
+    status: verified
+    devCapacity: "L40S primary + Inferentia overflow"
+    benchmark:
+      costPerHourUsd: 9.18
+      notes: "Documented stack cost; catalog sum may differ slightly by region/commitment"
+    fleet:
+      - instanceId: g6e.2xlarge
+        count: 2
+      - instanceId: inf2.24xlarge
+        count: 1
+    openshift:
+      selfHostedModelId: qwen3-coder-30b-a3b-fp8
+      useHcp: true
+      workerCount: 6
+      customStackHourlyUsd: 9.18
+    workload:
+      kind: codeAssistant
+      requestsPerDay: 2500
+      peakConcurrentRequests: 30
+      avgInputTokensPerRequest: 4000
+      avgOutputTokensPerRequest: 1500
+      avgThinkingTokensPerRequest: 2500
+      activeHoursFraction: 0.5
+
+  - id: pca-phase-5-inf2-48xl
+    name: "Phase 5 — 1× inf2.48xlarge (2× Qwen BF16 instances)"
+    status: planned
+    devCapacity: "8–10 developers (BF16, 8k context)"
+    benchmark:
+      costPerHourUsd: 12.98
+      peakOutputTps: 308
+      costPer1MOutputTokensUsdPeak: 11.69
+    fleet:
+      - instanceId: inf2.48xlarge
+        count: 1
+    openshift:
+      selfHostedModelId: qwen3-coder-30b-a3b-bf16-neuron
+      useHcp: true
+      workerCount: 6
+    workload:
+      kind: codeAssistant
+      requestsPerDay: 600
+      peakConcurrentRequests: 8
+      avgInputTokensPerRequest: 3000
+      avgOutputTokensPerRequest: 1200
+      avgThinkingTokensPerRequest: 2000
+      activeHoursFraction: 0.45
+
+  - id: pca-phase-5-dual-inf2-24xl
+    name: "Cross-phase — 2× inf2.24xlarge (BF16, 2 instances)"
+    status: reference
+    devCapacity: "8–10 developers"
+    benchmark:
+      costPerHourUsd: 12.98
+      peakOutputTps: 308
+      costPer1MOutputTokensUsdPeak: 11.69
+    fleet:
+      - instanceId: inf2.24xlarge
+        count: 2
+    openshift:
+      selfHostedModelId: qwen3-coder-30b-a3b-bf16-neuron
+      useHcp: true
+      workerCount: 6
+    workload:
+      kind: codeAssistant
+      requestsPerDay: 600
+      peakConcurrentRequests: 8
+      avgInputTokensPerRequest: 3000
+      avgOutputTokensPerRequest: 1200
+      avgThinkingTokensPerRequest: 2000
+      activeHoursFraction: 0.45
+
+bedrockComparisonDefaults:
+  bedrockModelId: anthropic.claude-3-5-sonnet
+  embeddingModelId: amazon.titan-embed-text-v2
+  region: us-east-1

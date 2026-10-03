@@ -1,0 +1,42 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://cloud.google.com/compute/gpus-pricing"
+region: us-central1
+currency: USD
+instances:
+  - id: g2-standard-4
+    gpus: 1
+    gpuModel: L4
+    accelerator: nvidia
+    vramGbPerGpu: 24
+    vcpu: 4
+    memoryGb: 16
+    hourlyUsd:
+      onDemand: 0.804
+      oneYear: 0.563
+      threeYear: 0.402
+      spot: 0.32
+  - id: g2-standard-8
+    gpus: 1
+    gpuModel: L4
+    accelerator: nvidia
+    vramGbPerGpu: 24
+    vcpu: 8
+    memoryGb: 32
+    hourlyUsd:
+      onDemand: 0.978
+      oneYear: 0.685
+      threeYear: 0.489
+      spot: 0.39
+  - id: a2-highgpu-1g
+    gpus: 1
+    gpuModel: A100
+    accelerator: nvidia
+    vramGbPerGpu: 40
+    vcpu: 12
+    memoryGb: 85
+    hourlyUsd:
+      onDemand: 3.673
+      oneYear: 2.571
+      threeYear: 1.837
+      spot: 1.2

@@ -1,0 +1,47 @@
+version: "1.0"
+source: "Planning assumptions for developer AI coding assistants — not guaranteed performance"
+description: >
+  Workload intensity presets used when sizing from developer population.
+  All fields are editable planning assumptions.
+presets:
+  - id: light
+    label: Light
+    avgInputTokensPerRequest: 4000
+    avgOutputTokensPerRequest: 400
+    requestsPerActiveDeveloperPerHour: 8
+    targetOutputTokensPerSecPerUser: 20
+    contextTokens: 8000
+    p95TtftSeconds: 4
+  - id: standard
+    label: Standard
+    avgInputTokensPerRequest: 8000
+    avgOutputTokensPerRequest: 750
+    requestsPerActiveDeveloperPerHour: 15
+    targetOutputTokensPerSecPerUser: 30
+    contextTokens: 16000
+    p95TtftSeconds: 3
+  - id: heavy
+    label: Heavy
+    avgInputTokensPerRequest: 16000
+    avgOutputTokensPerRequest: 1000
+    requestsPerActiveDeveloperPerHour: 20
+    targetOutputTokensPerSecPerUser: 40
+    contextTokens: 32000
+    p95TtftSeconds: 3
+  - id: agentic
+    label: Agentic
+    avgInputTokensPerRequest: 32000
+    avgOutputTokensPerRequest: 2000
+    requestsPerActiveDeveloperPerHour: 20
+    targetOutputTokensPerSecPerUser: 40
+    contextTokens: 64000
+    p95TtftSeconds: 4
+defaults:
+  developers: 200
+  peakActivePercentage: 0.25
+  generationConcurrencyPercentage: 0.4
+  activeHoursPerDay: 8
+  runtimeOverheadFraction: 0.15
+  safetyMarginFraction: 0.2
+  # Used when architecture-specific KV calc params are unavailable
+  kvCacheGbPerActiveSequence: 1.5

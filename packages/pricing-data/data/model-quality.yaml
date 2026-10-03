@@ -1,0 +1,166 @@
+version: "1.0"
+source: "https://huggingface.co/datasets/open-llm-leaderboard/contents"
+description: >
+  Maps calculator catalog models to quality tiers and Hugging Face repos for Open LLM Leaderboard
+  (OLL) scores. Closed APIs use static planning scores aligned to vendor tiers until a public HF eval exists.
+equivalenceClasses:
+  - id: frontier
+    label: Frontier reasoning
+    description: Top-tier closed or very large open models (Sonnet 4 class, GPT-4.1, Gemini 2.5 Pro).
+    averageMin: 68
+    averageMax: 100
+  - id: strong-open-70b
+    label: Strong open ~70B
+    description: Open weights in the Llama 3.3 / Qwen 2.5 72B class on OLL.
+    averageMin: 58
+    averageMax: 72
+  - id: mid-open
+    label: Mid open (8B–32B)
+    description: Efficient instruct models for many enterprise workloads.
+    averageMin: 45
+    averageMax: 62
+  - id: coder-specialist
+    label: Coding specialist
+    description: Code-tuned MoE or dense models (Qwen Coder, Codestral-class).
+    averageMin: 50
+    averageMax: 75
+  - id: fast-api
+    label: Fast / economical API
+    description: Haiku, Flash, mini — lower cost, still capable for high volume.
+    averageMin: 40
+    averageMax: 58
+entries:
+  # —— AWS Bedrock (managed) ——
+  - catalogKey: "aws:anthropic.claude-sonnet-4"
+    equivalenceClass: frontier
+    staticScores: { average: 72, mmluPro: 70, gpqa: 55 }
+  - catalogKey: "aws:anthropic.claude-3-7-sonnet"
+    equivalenceClass: frontier
+    staticScores: { average: 70, mmluPro: 68, gpqa: 52 }
+  - catalogKey: "aws:anthropic.claude-3-5-sonnet"
+    equivalenceClass: frontier
+    staticScores: { average: 68, mmluPro: 66, gpqa: 48 }
+  - catalogKey: "aws:anthropic.claude-opus-4"
+    equivalenceClass: frontier
+    staticScores: { average: 74, mmluPro: 72, gpqa: 58 }
+  - catalogKey: "aws:anthropic.claude-3-5-haiku"
+    equivalenceClass: fast-api
+    staticScores: { average: 52, mmluPro: 50, gpqa: 35 }
+  - catalogKey: "aws:anthropic.claude-3-haiku"
+    equivalenceClass: fast-api
+    staticScores: { average: 48, mmluPro: 46, gpqa: 32 }
+  - catalogKey: "aws:amazon.nova-pro-v1"
+    equivalenceClass: frontier
+    staticScores: { average: 65, mmluPro: 63, gpqa: 45 }
+  - catalogKey: "aws:amazon.nova-lite-v1"
+    equivalenceClass: fast-api
+    staticScores: { average: 50, mmluPro: 48, gpqa: 34 }
+  - catalogKey: "aws:meta.llama3-3-70b-instruct"
+    equivalenceClass: strong-open-70b
+    huggingFaceRepo: meta-llama/Llama-3.3-70B-Instruct
+  - catalogKey: "aws:meta.llama3-70b-instruct"
+    equivalenceClass: strong-open-70b
+    huggingFaceRepo: meta-llama/Meta-Llama-3-70B-Instruct
+  - catalogKey: "aws:mistral.mistral-large-3"
+    equivalenceClass: frontier
+    staticScores: { average: 69, mmluPro: 67, gpqa: 50 }
+  - catalogKey: "aws:deepseek.r1-v1"
+    equivalenceClass: frontier
+    staticScores: { average: 71, mmluPro: 69, gpqa: 56 }
+  # —— Azure OpenAI ——
+  - catalogKey: "azure:azure-gpt-5"
+    equivalenceClass: frontier
+    staticScores: { average: 75, mmluPro: 73, gpqa: 58 }
+  - catalogKey: "azure:azure-gpt-4-1"
+    equivalenceClass: frontier
+    staticScores: { average: 70, mmluPro: 68, gpqa: 52 }
+  - catalogKey: "azure:azure-gpt-4-1-mini"
+    equivalenceClass: fast-api
+    staticScores: { average: 55, mmluPro: 53, gpqa: 38 }
+  - catalogKey: "azure:azure-gpt-4o"
+    equivalenceClass: frontier
+    staticScores: { average: 66, mmluPro: 64, gpqa: 46 }
+  - catalogKey: "azure:azure-gpt-4o-mini"
+    equivalenceClass: fast-api
+    staticScores: { average: 52, mmluPro: 50, gpqa: 34 }
+  - catalogKey: "azure:azure-o3-mini"
+    equivalenceClass: frontier
+    staticScores: { average: 72, mmluPro: 70, gpqa: 54 }
+  - catalogKey: "azure:azure-o4-mini"
+    equivalenceClass: frontier
+    staticScores: { average: 70, mmluPro: 68, gpqa: 52 }
+  # —— Vertex AI ——
+  - catalogKey: "gcp:vertex-gemini-2-5-pro"
+    equivalenceClass: frontier
+    staticScores: { average: 73, mmluPro: 71, gpqa: 56 }
+  - catalogKey: "gcp:vertex-gemini-2-5-flash"
+    equivalenceClass: fast-api
+    staticScores: { average: 58, mmluPro: 56, gpqa: 40 }
+  - catalogKey: "gcp:vertex-gemini-2-0-flash"
+    equivalenceClass: fast-api
+    staticScores: { average: 54, mmluPro: 52, gpqa: 36 }
+  - catalogKey: "gcp:vertex-gemini-1-5-pro"
+    equivalenceClass: frontier
+    staticScores: { average: 64, mmluPro: 62, gpqa: 44 }
+  - catalogKey: "gcp:vertex-gemini-1-5-flash"
+    equivalenceClass: fast-api
+    staticScores: { average: 50, mmluPro: 48, gpqa: 33 }
+  # —— Open-weight (OpenShift / self-hosted) ——
+  - catalogKey: "open:qwen3-coder-30b-a3b-fp8"
+    equivalenceClass: coder-specialist
+    huggingFaceRepo: Qwen/Qwen3-Coder-30B-A3B-Instruct
+  - catalogKey: "open:qwen3-coder-30b-a3b-bf16-neuron"
+    equivalenceClass: coder-specialist
+    huggingFaceRepo: Qwen/Qwen3-Coder-30B-A3B-Instruct
+  - catalogKey: "open:qwen2.5-72b"
+    equivalenceClass: strong-open-70b
+    huggingFaceRepo: Qwen/Qwen2.5-72B-Instruct
+  - catalogKey: "open:qwen2.5-32b"
+    equivalenceClass: mid-open
+    huggingFaceRepo: Qwen/Qwen2.5-32B-Instruct
+  - catalogKey: "open:qwen2.5-coder-32b"
+    equivalenceClass: coder-specialist
+    huggingFaceRepo: Qwen/Qwen2.5-Coder-32B-Instruct
+  - catalogKey: "open:llama-3.3-70b"
+    equivalenceClass: strong-open-70b
+    huggingFaceRepo: meta-llama/Llama-3.3-70B-Instruct
+  - catalogKey: "open:llama-3.1-70b"
+    equivalenceClass: strong-open-70b
+    huggingFaceRepo: meta-llama/Llama-3.1-70B-Instruct
+  - catalogKey: "open:llama-3-70b"
+    equivalenceClass: strong-open-70b
+    huggingFaceRepo: meta-llama/Meta-Llama-3-70B-Instruct
+  - catalogKey: "open:llama-3.1-8b"
+    equivalenceClass: mid-open
+    huggingFaceRepo: meta-llama/Llama-3.1-8B-Instruct
+  - catalogKey: "open:llama-3-8b"
+    equivalenceClass: mid-open
+    huggingFaceRepo: meta-llama/Meta-Llama-3-8B-Instruct
+  - catalogKey: "open:deepseek-v3"
+    equivalenceClass: frontier
+    huggingFaceRepo: deepseek-ai/DeepSeek-V3
+  - catalogKey: "open:deepseek-r1-distill-70b"
+    equivalenceClass: strong-open-70b
+    huggingFaceRepo: deepseek-ai/DeepSeek-R1-Distill-Llama-70B
+  - catalogKey: "open:mistral-small-3"
+    equivalenceClass: mid-open
+    huggingFaceRepo: mistralai/Mistral-Small-3.1-24B-Instruct-2503
+  - catalogKey: "open:mistral-large-3"
+    equivalenceClass: frontier
+    staticScores: { average: 67, mmluPro: 65, gpqa: 48 }
+    huggingFaceRepo: mistralai/Mistral-Large-Instruct-2411
+  - catalogKey: "open:gemma-3-27b"
+    equivalenceClass: mid-open
+    huggingFaceRepo: google/gemma-3-27b-it
+  - catalogKey: "open:mixtral-8x7b"
+    equivalenceClass: mid-open
+    huggingFaceRepo: mistralai/Mixtral-8x7B-Instruct-v0.1
+  - catalogKey: "open:mistral-7b"
+    equivalenceClass: mid-open
+    huggingFaceRepo: mistralai/Mistral-7B-Instruct-v0.3
+  - catalogKey: "open:granite-8b"
+    equivalenceClass: mid-open
+    huggingFaceRepo: ibm-granite/granite-3.1-8b-instruct
+  - catalogKey: "open:mistral-large"
+    equivalenceClass: strong-open-70b
+    staticScores: { average: 60, mmluPro: 58, gpqa: 42 }

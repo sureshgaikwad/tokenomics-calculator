@@ -1,0 +1,15 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://azure.microsoft.com/pricing/details/openshift/"
+region: eastus
+currency: USD
+openshiftPremiumPer4VcpuHour: 0.171
+defaultWorkerInstance:
+  type: Standard_D4s_v5
+  vcpu: 4
+  hourlyInfraUsd: 0.192
+  osDiskGb: 128
+  diskGbMonthUsd: 0.10
+defaultWorkerCount: 6
+controlPlaneNodes: 3
+controlPlaneIncludedInLicense: true

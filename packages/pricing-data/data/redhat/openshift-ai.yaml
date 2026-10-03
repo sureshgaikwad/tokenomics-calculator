@@ -1,0 +1,29 @@
+version: "1.0"
+effectiveDate: "2025-01-01"
+source: "https://www.redhat.com/en/resources/ai-subscription-guide-detail"
+currency: USD
+licensingModes:
+  managedCloudService:
+    description: OpenShift AI managed cloud service via AWS Marketplace
+    monthlyUsdPerCluster: 0
+    openshiftAiUsdPerCorePairYear: 0
+    note: Enter your Marketplace quote
+  selfManaged:
+    description: Self-managed OpenShift AI on ROSA/ARO/OSD
+    openshiftAiUsdPerCorePairYear: 0
+    note: Contact Red Hat for core-pair pricing
+aiAccelerator:
+  usdPerGpuYear: 0
+  note: One subscription per physical GPU; enter your quote
+osd:
+  workerFeePer4VcpuYear:
+    onDemand: 1500
+    oneYear: 1000
+    threeYear: 667
+  billingModels:
+    - standard
+    - ccs
+ragAuxDefaults:
+  vectorDbMonthlyUsd: 500
+  objectStorageMonthlyUsd: 100
+  egressMonthlyUsd: 50
